@@ -89,6 +89,7 @@ namespace Minerals
             services.AddTransient<IRTNumberRepository, RTNumberRepository>();
             services.AddTransient<IRTNumberBusinessLogic, RTNumberBusinessLogic>();
             services.AddTransient<IPetRepository, PetRepository>();
+            services.AddTransient<IPetBusinessLogic, PetBusinessLogic>();
             services.AddSingleton<MenuDataViewModel>();
             services.AddSingleton<FileTypeData>();
             services.AddScoped<ErrorLoggingAttribute>();
@@ -148,3 +149,4 @@ namespace Minerals
         }
     }
 }
+
