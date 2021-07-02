@@ -17,16 +17,19 @@ namespace Minerals.Controllers
         private readonly IGenericRepository<PetType> genericPetTypeRepository;
         private readonly IGenericRepository<Pet> genericPetRepository;
         private readonly IPetRepository petRepository;
+        private readonly IPetBusinessLogic businessLogic;
        
         public PetsMgrApiController(
             IGenericRepository<PetType> genericPetTypeRepo,
             IGenericRepository<Pet> genericPetRepo,
-            IPetRepository petRepo
+            IPetRepository petRepo,
+            IPetBusinessLogic petBusinessLogic
             )
         {
             genericPetTypeRepository = genericPetTypeRepo;
             genericPetRepository = genericPetRepo;
             petRepository = petRepo;
+            businessLogic = petBusinessLogic;
         }
 
         [HttpGet]
@@ -38,5 +41,8 @@ namespace Minerals.Controllers
         [HttpGet("GetPetTypes")]
         public async Task<IActionResult> GetPetTypes() =>
             Ok((await genericPetTypeRepository.GetAllAsync().ConfigureAwait(false)).OrderBy(x => x.PetTypeName));
+
+        [HttpPost]
+        public IActionResult Post([FromBody]  Pet model) => Ok(businessLogic.Save(model));
     }
 }
