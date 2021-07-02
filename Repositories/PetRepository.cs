@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Minerals.Contexts;
 using Minerals.Interfaces;
+using Models;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,5 +24,16 @@ await context.Pets.Select(x => new
  .OrderBy(x => x.PetName)
 .ToListAsync()
 .ConfigureAwait(false);
+
+        public void Update(Pet model)
+        {
+            var pet = context.Pets.Find(model.Id);
+            pet.PetName = model.PetName;
+            pet.PetTypeId = model.PetTypeId;
+            pet.PetPrice = model.PetPrice;
+            pet.PetBirthdate = model.PetBirthdate;
+
+            context.SaveChanges();
+        }
     }
 }
