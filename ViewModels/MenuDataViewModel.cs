@@ -127,7 +127,7 @@ namespace Minerals.ViewModels
                     Pages = new List<ModulePageViewModel>
                     {
                          new ModulePageViewModel{AspRouteContainer = null, PageName = "Search Pets" },
-                         new ModulePageViewModel{AspRouteContainer = "addUpdatePetsContainer", PageName = "Add  Pet" },
+                         new ModulePageViewModel{AspRouteContainer = "addUpdatePetContainer", PageName = "Add  Pet" },
                     }
                 },
            }
