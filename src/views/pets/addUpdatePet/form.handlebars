@@ -1,0 +1,159 @@
+<form id="addUpdatePetForm" novalidate autocomplete="off" onsubmit="event.preventDefault()">
+    <h3 class="card-title" style="display: inline;  position:relative; top: 5px;">
+        {{#if pet.id}}
+        View / Edit Pet
+        {{else}}
+        Add Pet
+        {{/if}}
+    </h3>
+    {{#if editmode}}
+    <button type="submit" class="btn btn-secondary btn-sm petSubmitbtn">
+        <i class="fas fa-save"></i>
+        Save
+    </button>
+    <button type="button" class="btn btn-secondary btn-sm  petSubmitBtnDisabled" disabled style="display: none;">
+        <i class="fas fa-spinner fa-spin"></i>
+        Save
+    </button>
+    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#petModal">
+        <i class="fas fa-times"></i> Cancel
+    </button>
+    <button type="button" class="btn btn-secondary btn-sm scrollToBottomBtn faa-parent animated-hover">
+        <i class="fas fa-hand-point-down faa-falling"></i> Scroll to Bottom
+    </button>
+    {{else}}
+    <button type="button" class="btn btn-secondary btn-sm editPetBtn">
+        <i class="fas fa-edit"></i> Edit
+    </button>
+    <button type="button" class="btn btn-secondary btn-sm addNewPetBtn">
+        <i class="fas fa-plus"></i> New
+    </button>
+    <a href="./Audits" class="btn btn-secondary btn-sm">
+        <i class="fas fa-binoculars"></i> Search Pets
+    </a>
+    <button type="button" class="btn btn-secondary btn-sm scrollToBottomBtn faa-parent animated-hover">
+        <i class="fas fa-hand-point-down faa-falling"></i> Scroll to Bottom
+    </button>
+    {{/if}}
+
+<div class="row pt-4">
+
+    <div class="col-sm-12 col-md-6 col-lg-6 ">
+        <div class="form-group">
+            <label for="petName"> Pet Name</label>
+            <input id="petName" name="petName" type="text" required value="{{pet.petName}}"
+                   class="form-control   petInput"
+                   {{#unless editmode}} disabled readonly {{/unless}} />
+        </div>
+        <div style="display:none;" id="petNameError"><span class="text-danger small">Please enter an Pet</span></div>
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-lg-6 ">
+        <div class="form-group">
+            <label> Pet Type</label>
+            </br>
+            <select id="petTypeId" name="petTypeId" style="min-width: 100%;" required class="form-control select2 petInput"
+                    {{#unless editmode}} disabled readonly {{/unless}}>
+                <option></option>
+                {{#each this.petTypes}}
+                <option {{#if this.selected}}
+                        selected
+                        {{/if}}
+                        value="{{this.id}}">
+                    {{this.petTypeName}}
+                </option>
+                {{/each}}
+            </select>
+        </div>
+        <div style="display:none;" id="petTypeIdError"><span class="text-danger small">Please select a type of pet</span></div>
+    </div>
+
+
+    <div class="col-sm-12 col-md-6 col-lg-6 ">
+        <div class="form-group">
+            <label for="petPrice">
+                Pet Price
+            </label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+                </div>
+                <input type="number"
+                       id="petPrice"
+                       name="petPrice"
+                       class="form-control petInput"
+                       placeholder="0.00"
+                       step=".01"
+                       min="0"
+                       value="{{pet.petPrice}}"
+                       {{#unless editmode}} disabled readonly {{/unless}} />
+            </div>
+            <div style="display:none;" id="petPriceError"><span class="text-danger small">Please enter a valid amount </span></div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-lg-6">
+        <div class="form-group">
+            <label for="petBirthdate">
+                Pet Birth Date
+            </label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="petBirthdate" name="petBirthdate" readonly
+                       {{#unless this.editmode}}
+                       disabled
+                       {{/unless}} />
+                {{#if this.editmode}}
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" id="petBirthdateBtn" type="button"><i class="fas fa-calendar-alt"></i></button>
+                    <button class="btn btn-outline-secondary" id="petBirthdateClearBtn" type="button"><i class="fas fa-times"></i></button>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+    {{#if editmode}}
+    <div class="row mt-1">
+        <div class="col-md-12">
+            <div class="form-group">
+                <button type="submit" class="btn btn-info petSubmitbtn">
+                    <i class="fas fa-save"></i>
+                    Save
+                </button>
+                <button type="button" class="btn btn-info petSubmitBtnDisabled" disabled style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Save
+                </button>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#PetModal">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+                <button type="button" class="btn btn-primary scrollToTopBtn faa-parent animated-hover">
+                    <i class="fas fa-hand-point-up faa-bounce"></i> Scroll to Top
+                </button>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="row mt-1">
+        <div class="col-md-12">
+            <div class="form-group">
+                {{#if checkId}}
+                <a href="./Accounts?container=addUpdateCheckContainer&checkId={{checkId}}" class="btn btn-info">  <i class="fas fa-arrow-left"></i> Back to Check </a>
+                {{/if}}
+             
+                <button type="button" class="btn btn-secondary editPetBtn">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                <button type="button" class="btn btn-primary scrollToTopBtn faa-parent animated-hover">
+                    <i class="fas fa-hand-point-up faa-bounce"></i> Scroll to Top
+                </button>
+            </div>
+        </div>
+    </div>
+    {{/if}}
+
+</form>
