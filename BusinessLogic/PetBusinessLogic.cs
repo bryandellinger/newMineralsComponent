@@ -35,7 +35,7 @@ namespace Minerals.BusinessLogic
                     PetPrice = model.PetPrice,
                 };
                 genericRepository.Insert(newPet);
-                return new RTNumber { Id = newPet.Id };
+                return new Pet { Id = newPet.Id };
             }
         }
     }
