@@ -9,5 +9,6 @@ namespace Models
     {
         public long Id { get; set; }
         public string PetTypeName { get; set; }
+        public IEnumerable<Pet> Pets { get; set; }
     }
 }
