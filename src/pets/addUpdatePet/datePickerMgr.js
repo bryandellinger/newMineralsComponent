@@ -6,10 +6,10 @@ export default class datePickerMgr {
 
   init(element, dateFormat) {
     const onSelect = (dateText) => {
-      const { Pet } = this.addUpdatePetMgr.state;
-      Pet[element] = new Date(dateText);
+      const { pet } = this.addUpdatePetMgr.state;
+      pet[element] = new Date(dateText);
       this.addUpdatePetMgr.setState(
-        { ...this.addUpdatePetMgr.state, Pet },
+        { ...this.addUpdatePetMgr.state, pet },
       );
       this.addUpdatePetMgr.render();
     };
@@ -30,8 +30,8 @@ export default class datePickerMgr {
     this.initBackSpaceClick(element);
 
    
-    if (this.addUpdatePetMgr.state.Pet[element]) {
-      $(`#${element}`).datepicker('setDate', this.addUpdatePetMgr.state.Pet[element]);
+    if (this.addUpdatePetMgr.state.pet[element]) {
+      $(`#${element}`).datepicker('setDate', this.addUpdatePetMgr.state.pet[element]);
     }
   }
 
@@ -56,10 +56,10 @@ export default class datePickerMgr {
 
   clear(element) {
     $(`#${element}`).datepicker('setDate', null);
-    const { Pet } = this.addUpdatePetMgr.state;
-    Pet[element] = null;
+    const { pet } = this.addUpdatePetMgr.state;
+    pet[element] = null;
     this.addUpdatePetMgr.setState(
-      { ...this.addUpdatePetMgr.state, Pet },
+      { ...this.addUpdatePetMgr.state, pet },
     );
     this.addUpdatePetMgr.render();
   }
